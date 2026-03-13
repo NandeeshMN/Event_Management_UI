@@ -5,6 +5,8 @@
 - It allows users to browse events, view event details, book tickets, and receive booking confirmation.
 - The interface also includes an admin dashboard for managing events and bookings.
 
+---
+
 ### This project is built using:
 
 - HTML
@@ -12,14 +14,14 @@
 - JavaScript
 -It is designed as a simple UI prototype for learning web development and UI design.
 ---
-🚀 Features
-🏠 Home page for event browsing
-📅 Event details page
-🎟️ Ticket booking page
-✅ Booking confirmation page
-📊 Admin dashboard interface
-🎨 Responsive UI using CSS
-⚡ JavaScript for basic interactions
+- 🚀 Features
+- 🏠 Home page for event browsing
+- 📅 Event details page
+- 🎟️ Ticket booking page
+- ✅ Booking confirmation page
+- 📊 Admin dashboard interface
+- 🎨 Responsive UI using CSS
+- ⚡ JavaScript for basic interactions
 
 ---
 
