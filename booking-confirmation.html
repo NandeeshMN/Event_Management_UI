@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Booking Confirmation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- INTERNAL CSS -->
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        background: #f5f5f5;
+    }
+
+    .navbar {
+        width: 100%;
+        padding: 15px 30px;
+        background: #6a00ff;
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .success-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(0, 200, 0, 0.15);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        margin-bottom: 10px;
+    }
+
+    .success-icon i {
+        font-size: 40px;
+        color: green;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 34px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+        border: 1px solid #e0d7ff;
+    }
+
+    .card-title {
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #6a00ff;
+    }
+
+    .badge {
+        background: green;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        float: right;
+        margin-top: -25px;
+    }
+
+    .info-row {
+        display: flex;
+        margin: 10px 0;
+    }
+
+    .info-row i {
+        margin-right: 12px;
+        margin-top: 4px;
+        color: #6a00ff;
+    }
+
+    .btn-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 10px;
+    }
+
+    .btn {
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .btn-outline {
+        background: white;
+        border: 2px solid #6a00ff;
+        color: #6a00ff;
+    }
+
+    .btn-primary {
+        background: linear-gradient(to right, #6a00ff, #b300ff);
+        color: white;
+    }
+
+    .email-box {
+        display: flex;
+        padding: 15px;
+        background: #eee;
+        border-radius: 10px;
+        margin-top: 15px;
+    }
+
+    .email-box i {
+        margin-right: 12px;
+        color: #6a00ff;
+        font-size: 20px;
+    }
+
+</style>
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+
+<div class="navbar">Eventify</div>
+
+<div class="container">
+
+    <!-- Success Message -->
+    <div class="success-icon">
+        <i class="fa fa-check-circle"></i>
+    </div>
+    <div class="title">Booking Confirmed!</div>
+    <div class="subtitle">Your tickets have been booked successfully</div>
+
+    <!-- Booking Details Card -->
+    <div class="card">
+        <!-- <span class="badge">Confirmed</span> -->
+        <div class="card-title">Booking Details</div>
+
+        <!-- <div id="bookingDetails"></div> -->
+
+        <!-- Buttons -->
+        <div class="btn-row">
+            <button class="btn btn-outline" onclick="window.print()">
+                <i class="fa fa-download"></i> Download Ticket
+            </button>
+
+            <button class="btn btn-primary" onclick="window.location.href='index.html'">
+                <i class="fa fa-home"></i> Back to Home
+            </button>
+        </div>
+    </div>
+
+    <!-- Email Confirmation -->
+    <div class="card email-box">
+        <i class="fa fa-envelope"></i>
+        <p>
+            A confirmation email has been sent to 
+            <b id="emailDisplay"></b>. Please check your inbox and spam folder.
+        </p>
+    </div>
+
+</div>
+
+<!-- JS to Load Booking Data -->
+<script>
+    const booking = JSON.parse(localStorage.getItem("latest_booking"));
+
+    if (!booking) {
+        document.getElementById("bookingDetails").innerHTML =
+            "<p style='color:red;font-weight:bold'>Booking Not Found</p>";
+    } else {
+        document.getElementById("emailDisplay").innerText = booking.email;
+
+        document.getElementById("bookingDetails").innerHTML = `
+            <div class="info-row">
+                <i class="fa fa-calendar"></i>
+                <div>
+                    <b>Date:</b> ${booking.eventDate}<br>
+                    <small>${booking.eventTime}</small>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <i class="fa fa-map-marker"></i>
+                <div>
+                    <b>Venue:</b> ${booking.venue}<br>
+                    <small>${booking.location}</small>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <i class="fa fa-ticket"></i>
+                <div>
+                    <b>Tickets:</b> ${booking.ticketCount}<br>
+                    <small>Total: $${booking.totalAmount}</small>
+                </div>
+            </div>
+
+            <div class="info-row">
+                <i class="fa fa-user"></i>
+                <div>
+                    <b>Name:</b> ${booking.fullName}
+                </div>
+            </div>
+
+            <div class="info-row">
+                <i class="fa fa-envelope"></i>
+                <div>
+                    <b>Email:</b> ${booking.email}
+                </div>
+            </div>
+
+            <div class="info-row">
+                <i class="fa fa-phone"></i>
+                <div>
+                    <b>Phone:</b> ${booking.phone}
+                </div>
+            </div>
+        `;
+    }
+</script>
+
+</body>
+</html>

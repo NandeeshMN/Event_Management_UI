@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Page</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background: #f5f5f5;
+    }
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    h2, h3, h4 {
+        margin: 0 0 10px 0;
+    }
+    .card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    button {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        background: linear-gradient(to right, #4f46e5, #3b82f6);
+        color: #fff;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+    .summary {
+        position: sticky;
+        top: 20px;
+    }
+    .summary h4 {
+        margin-bottom: 10px;
+    }
+    .summary div {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+    }
+    .separator {
+        border-bottom: 1px solid #ddd;
+        margin: 15px 0;
+    }
+    .success-message {
+        background: #d1fae5;
+        color: #065f46;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div id="successMessage" class="success-message" style="display:none;">
+        Booking confirmed! Your booking ID is: <span id="bookingId"></span>
+    </div>
+
+    <div class="card">
+        <h2>Complete Your Booking</h2>
+        <form id="bookingForm">
+            <h3>Personal Information</h3>
+            <label for="fullName">Full Name *</label>
+            <input type="text" id="fullName" name="fullName" required placeholder="Enter Yore Name">
+
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required placeholder="abc@gmail.com">
+
+            <label for="phone">Phone *</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <div class="separator"></div>
+
+            <h3>Ticket Selection</h3>
+            <label for="ticketCount">Number of Tickets *</label>
+            <input type="number" id="ticketCount" name="ticketCount" min="1" value="1" required>
+
+            <div class="separator"></div>
+
+            <h3>Payment Method</h3>
+            <label>
+                <input type="radio" name="paymentMethod" value="card" checked> Credit / Debit Card
+            </label>
+            <label>
+                <input type="radio" name="paymentMethod" value="paypal"> PayPal
+            </label>
+
+            <div class="separator"></div>
+<!-- 
+            <button type="submit" id="bookNowButton">Confirm Booking</button> -->
+        </form>
+    </div>
+<!-- 
+    <div class="card summary">
+        <h4>Order Summary</h4>
+        <div>
+            <span>Event:</span>
+            <span id="eventTitle">Sample Event</span>
+        </div>
+        <div>
+            <span>Date:</span>
+            <span id="eventDate">Dec 3, 2025</span>
+        </div>
+        <div>
+            <span>Venue:</span>
+            <span id="eventVenue">City Hall</span>
+        </div>
+        <div>
+            <span>Ticket Price:</span>
+            <span id="ticketPrice">$50.00</span>
+        </div>
+        <div>
+            <span>Service Fee:</span>
+            <span id="serviceFee">$5.00</span>
+        </div>
+        <div>
+            <strong>Total:</strong>
+            <strong id="totalAmount">$55.00</strong>
+        </div>
+    </div> -->
+
+</div>
+
+<!-- <script>
+    // Sample event data
+    // const event = {
+    //     id: "EV123",
+    //     title: "Sample Event",
+    //     date: "2025-12-03",
+    //     venue: "City Hall",
+    //     price: 50,
+    //     availableTickets: 100
+    // };
+
+    const form = document.getElementById('bookingForm');
+    const ticketCountInput = document.getElementById('ticketCount');
+    const ticketPriceEl = document.getElementById('ticketPrice');
+    const serviceFeeEl = document.getElementById('serviceFee');
+    const totalAmountEl = document.getElementById('totalAmount');
+    const successMessageEl = document.getElementById('successMessage');
+    const bookingIdEl = document.getElementById('bookingId');
+
+    const serviceFeeRate = 0.1;
+
+    function updateSummary() {
+        const ticketCount = parseInt(ticketCountInput.value) || 1;
+        const total = event.price * ticketCount;
+        const serviceFee = total * serviceFeeRate;
+        const finalAmount = total + serviceFee;
+
+        ticketPriceEl.textContent = `$${total.toFixed(2)}`;
+        serviceFeeEl.textContent = `$${serviceFee.toFixed(2)}`;
+        totalAmountEl.textContent = `$${finalAmount.toFixed(2)}`;
+    }
+
+    ticketCountInput.addEventListener('input', updateSummary);
+    updateSummary();
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const ticketCount = parseInt(ticketCountInput.value);
+        if (ticketCount > event.availableTickets) {
+            alert('Not enough tickets available');
+            return;
+        }
+
+        const formData = {
+            fullName: document.getElementById('fullName').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            ticketCount: ticketCount,
+            paymentMethod: document.querySelector('input[name="paymentMethod"]:checked').value
+        };
+
+        const booking = {
+            id: `BK${Date.now()}`,
+            eventId: event.id,
+            eventTitle: event.title,
+            eventDate: event.date,
+            venue: event.venue,
+            ...formData,
+            totalAmount: event.price * ticketCount * (1 + serviceFeeRate),
+            bookingDate: new Date().toISOString(),
+            status: 'confirmed'
+        };
+
+        const existingBookings = JSON.parse(localStorage.getItem('eventify_bookings') || '[]');
+        existingBookings.push(booking);
+        localStorage.setItem('eventify_bookings', JSON.stringify(existingBookings));
+
+        bookingIdEl.textContent = booking.id;
+        successMessageEl.style.display = 'block';
+        form.reset();
+        updateSummary();
+    });
+</script> -->
+<button class="details-btn" onclick="window.location.href='booking-confirmation.html'">Confirm Booking</button>
+ 
+</body>
+</html>

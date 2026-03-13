@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eventify Admin Dashboard</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    body {
+        margin: 0;
+        background: #f5f5f5;
+        font-family: "Poppins", sans-serif;
+    }
+
+    /* NAVBAR */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 40px;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+        font-size: 22px;
+        font-weight: 700;
+        color: #7b3ef3;
+        display: flex;
+        align-items: center;
+    }
+
+    .profile {
+        width: 40px;
+        height: 40px;
+        background: #7b3ef3;
+        border-radius: 50%;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+    }
+
+    /* CONTAINER */
+    .container {
+        width: 90%;
+        margin: auto;
+        padding: 40px 0;
+    }
+
+    h1 {
+        font-size: 38px;
+        margin-bottom: 10px;
+    }
+
+    .subtitle {
+        color: gray;
+        margin-bottom: 25px;
+    }
+
+    /* GRID STATS */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .card {
+        background: white;
+        padding: 25px;
+        border-radius: 14px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        transition: .3s;
+    }
+
+    .card:hover {
+        transform: translateY(-4px);
+    }
+
+    .card-value {
+        font-size: 32px;
+        font-weight: 700;
+    }
+
+    .icon-box {
+        width: 55px;
+        height: 55px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+    }
+
+    /* COLORS */
+    .primary { background: #7c3aed20; color:#7c3aed; }
+    .accent { background: #ee772320; color:#ee7723; }
+    .secondary { background: #0091ff20; color:#0091ff; }
+    .success { background: #18a44c20; color:#18a44c; }
+
+    /* QUICK ACTIONS */
+    .actions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .action-btn {
+        background: white;
+        padding: 25px;
+        border-radius: 14px;
+        border: 1px solid #ddd;
+        text-align: center;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+    .action-btn:hover {
+        background:#f0e7ff;
+        border-color:#7c3aed;
+        transform: translateY(-3px);
+    }
+
+    .action-btn i {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    /* BOOKINGS */
+    .booking {
+        background: white;
+        padding: 16px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid #eee;
+        transition: .3s;
+    }
+
+    .booking:hover {
+        border-color: #7c3aed;
+    }
+
+    .badge {
+        padding: 5px 10px;
+        background: #18a44c20;
+        color: #18a44c;
+        border-radius: 6px;
+        font-size: 12px;
+    }
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo"><i class="fa-solid fa-chart-line" style="margin-right:10px;"></i> Eventify Admin</div>
+    <div class="profile">AD</div>
+</div>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <h1>Admin Dashboard</h1>
+    <p class="subtitle">Manage events and monitor bookings</p>
+
+    <!-- STATS GRID -->
+    <div class="stats-grid">
+        <div class="card">
+            <p>Total Events</p>
+            <div style="display:flex;align-items:center;">
+                <span class="card-value">12</span>
+                <div class="icon-box primary"><i class="fa-solid fa-calendar"></i></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <p>Total Bookings</p>
+            <div style="display:flex;align-items:center;">
+                <span class="card-value">54</span>
+                <div class="icon-box accent"><i class="fa-solid fa-ticket"></i></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <p>Tickets Sold</p>
+            <div style="display:flex;align-items:center;">
+                <span class="card-value">143</span>
+                <div class="icon-box secondary"><i class="fa-solid fa-users"></i></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <p>Total Revenue</p>
+            <div style="display:flex;align-items:center;">
+                <span class="card-value">$4,820</span>
+                <div class="icon-box success"><i class="fa-solid fa-dollar-sign"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUICK ACTIONS -->
+    <h2>Quick Actions</h2>
+    <div class="actions-grid">
+        <div class="action-btn" onclick="alert('Manage Events Clicked')">
+            <i class="fa-solid fa-gear"></i>
+            <h3>Manage Events</h3>
+            <p>Create, edit or delete events</p>
+        </div>
+
+        <div class="action-btn" onclick="alert('View Bookings Clicked')">
+            <i class="fa-solid fa-eye"></i>
+            <h3>View Bookings</h3>
+            <p>See all customer bookings</p>
+        </div>
+
+        <div class="action-btn" onclick="alert('Analytics Coming Soon!')">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3>Analytics</h3>
+            <p>View detailed reports</p>
+        </div>
+    </div>
+
+    <!-- RECENT BOOKINGS -->
+    <h2>Recent Bookings</h2>
+
+    <div class="booking">
+        <div>
+            <h4>Summer Music Fest</h4>
+            <p>Bharath • 2 tickets</p>
+        </div>
+        <div style="text-align:right;">
+            <p class="card-value" style="font-size:18px;">$180</p>
+            <span class="badge">Confirmed</span>
+        </div>
+    </div>
+
+    <div class="booking">
+        <div>
+            <h4>Tech Innovation Expo</h4>
+            <p>Sameer • 1 ticket</p>
+        </div>
+        <div style="text-align:right;">
+            <p class="card-value" style="font-size:18px;">$299</p>
+            <span class="badge">Confirmed</span>
+        </div>
+    </div>
+
+     <div class="booking">
+        <div>
+            <h4>Sports</h4>
+            <p>Shivu • 1 ticket</p>
+        </div>
+        <div style="text-align:right;">
+            <p class="card-value" style="font-size:18px;">$299</p>
+            <span class="badge">Confirmed</span>
+        </div>
+    </div>
+
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>
